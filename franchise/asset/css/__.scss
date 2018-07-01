@@ -1,0 +1,317 @@
+/*! v1.0 | Copyright (c) 2017 Andrei Pimenov | MIT License | http://pimenov.space */
+
+/* Import
+   ========================================================================== */
+
+@import "normalize";
+
+/* Palette
+   ========================================================================== */
+
+$color-light: #fcfcfc;
+$color-dark: #111111;
+
+/* Basic
+   ========================================================================== */
+
+$body-font-family: "Open Sans";
+$body-font-weight: 400;
+$body-background: $color-light;
+$body-color: $color-dark;
+$a-color:  $color-dark;
+$a-hover-color: $color-dark;
+
+$break-points: (
+	small: 768px,
+	medium: 992px,
+	large: 1200px
+);
+
+/* Typography
+   ========================================================================== */
+
+$font-size: 1.6rem;
+$line: 2.4rem;
+
+$small-font-sizes: (
+	/* Ratio = sqrt(sqrt(2)) */
+	-1: 1.345434264rem,	/* 1.6 × (sqrt(sqrt(2))^(-1)) = 1.345434264 */
+	0: 1.6rem,					/* 1.6 × (sqrt(sqrt(2))^(0)) = 1.6 */
+	1: 1.902731384rem,	/* 1.6 × (sqrt(sqrt(2))^(1)) = 1.902731384 */
+	2: 2.2627417rem,		/* 1.6 × (sqrt(sqrt(2))^(2)) = 2.2627417 */
+	3: 2.690868529rem,	/* 1.6 × (sqrt(sqrt(2))^(3)) = 2.690868529 */
+	4: 3.2rem						/* 1.6 × (sqrt(sqrt(2))^(4)) = 3.2 */
+);
+$small-line-heights: (
+	-1: 2.4rem,
+	0: 2.4rem,
+	1: 2.4rem,
+	2: 3.2rem,
+	3: 3.2rem,
+	4: 4.8rem
+);
+
+$medium-font-sizes: (
+	/* Ratio = sqrt(2) */
+	-1: 1.13137085rem,	/* 1.6 × (sqrt(2)^(-1)) = 1.13137085 */
+	0: 1.6rem,					/* 1.6 × (sqrt(2)^(0)) = 1.6 */
+	1: 2.2627417rem,		/* 1.6 × (sqrt(2)^(1)) = 2.2627417 */
+	2: 3.2rem,					/* 1.6 × (sqrt(2)^(2)) = 3.2 */
+	3: 4.5254834rem,		/* 1.6 × (sqrt(2)^(3)) = 4,5254834 */
+	4: 6.4rem						/* 1.6 × (sqrt(2)^(4)) = 6.4 */
+);
+$medium-line-heights: (
+	-1: 2.4rem,
+	0: 2.4rem,
+	1: 3.2rem,
+	2: 4.8rem,
+	3: 4.8rem,
+	4: 7.2rem
+);
+
+/* Mixins
+   ========================================================================== */
+
+@mixin small {
+	@media (max-width: map-get($break-points, small) - 1px) {
+		@content;
+	}
+}
+
+@mixin medium {
+	@media (min-width: map-get($break-points, small)) {
+		@content;
+	}
+}
+
+@mixin large {
+	@media (min-width: map-get($break-points, medium)) {
+		@content;
+	}
+}
+
+@mixin xlarge {
+	@media (min-width: map-get($break-points, large)) {
+		@content;
+	}
+}
+
+@mixin less($width: default) {
+	@if $width != default {
+		@media (max-width: $width) {
+			@content;
+		}
+	}
+}
+
+@mixin more($width: default) {
+	@if $width != default {
+		@media (min-width: $width) {
+			@content;
+		}
+	}
+}
+
+@mixin type($level: 0) {
+	font-size: map-get($small-font-sizes, $level);
+	line-height: map-get($small-line-heights, $level);
+	@include medium {
+		font-size: map-get($medium-font-sizes, $level);
+		line-height: map-get($medium-line-heights, $level);
+	}
+}
+
+@mixin clear {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Preset
+   ========================================================================== */
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+}
+
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body {
+	background: $body-background;
+	color: $body-color;
+	font-size: $font-size;
+	font-family: $body-font-family, sans-serif;
+	font-weight: $body-font-weight;
+	line-height: $line / $font-size;
+	position: relative;
+}
+
+a:link, a:visited {
+	color: $a-color;
+	text-decoration: none;
+}
+
+a:hover, a:active {
+	color: $a-hover-color;
+	text-decoration: none;
+}
+
+p, table, ul, ol, form, figure {
+	margin-top: 0;
+	margin-bottom: $line;
+}
+
+ul {
+	list-style: disc inside;
+}
+
+ol {
+	list-style: decimal inside;
+}
+
+ol, ul {
+	padding-left: 0;
+	ol, ul {
+		margin: 0 0 $line $line;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: inherit;
+	margin-top: 0;
+}
+
+h1, h2, h3, h4 {
+	margin-bottom: $line;
+}
+
+h5, h6 {
+	margin-bottom: 0;
+}
+
+h1 {
+	@include type(4);
+}
+
+h2 {
+	@include type(3);
+}
+
+h3 {
+	@include type(2);
+}
+
+h4 {
+	@include type(1);
+}
+
+h5 {
+	@include type(0);
+}
+
+h6 {
+	@include type(-1);
+}
+
+/* Specific styles for input,textarea,button and other controls
+   ========================================================================== */
+
+button,
+input[type=submit],
+input[type=reset],
+input[type=button] {
+	background: transparent;
+	border: 0.1rem rgba($color-dark, 0.3) solid;
+	color: $color-dark;
+	cursor: pointer;
+	display: inline-block;
+	font-size: inherit;
+	font-family: inherit;
+	letter-spacing: inherit;
+	max-width: 100%;
+	min-height: 2*$line;
+	padding: $line / 2 - 0.1rem $line * 0.75;
+	text-align: inherit;
+	text-decoration: none;
+	transition: all 0.3s;
+	-webkit-tap-highlight-color: transparent;
+	&:focus {
+		outline: 0;
+	}
+	&:hover, &:active {
+		outline: 0;
+		border-color: $color-dark;
+		background: $color-dark;
+		color: $color-light;
+	}
+	> * {
+		margin: 0;
+	}
+}
+
+input[type=email],
+input[type=number],
+input[type=search],
+input[type=text],
+input[type=tel],
+input[type=password], textarea, select {
+	display: inline-block;
+	max-width: 100%;
+	line-height: inherit;
+	text-align: inherit;
+	text-decoration: none;
+	min-height: 2*$line;
+	background: transparent;
+	color: $color-dark;
+	font-size: $font-size;
+	font-family: inherit;
+	letter-spacing: inherit;
+	padding: $line / 2 $line * 0.75 $line / 2 - 0.1rem $line * 0.75;
+	border: none;
+	border-bottom: 0.1rem rgba($color-dark, 0.3) solid;
+	transition: all 0.3s;
+	-webkit-tap-highlight-color: transparent;
+	&:focus, &:active {
+		outline: 0;
+		border-bottom-color: $color-dark;
+	}
+}
+
+input[type=email],
+input[type=number],
+input[type=search],
+input[type=text],
+input[type=tel],
+input[type=password], textarea {
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+textarea {
+	min-height: 4*$line;
+	resize: none;
+}
+
+label {
+	display: block;
+	margin-bottom: $line;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	display: inline;
+	vertical-align: middle;
+	+ span {
+		display: inline;
+		margin-left: $line / 4;
+		margin-right: $line / 4;
+	}
+}
