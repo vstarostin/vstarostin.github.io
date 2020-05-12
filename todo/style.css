@@ -1,0 +1,66 @@
+* {
+    box-sizing: border-box;
+}
+div {
+    margin: 20px 0;
+}
+input {
+    outline: none;
+    border: 1px solid #888;
+    border-radius: 6px;
+    padding: 6px 15px;
+    background-color: transparent;
+}
+#addBtn {
+    outline: none;
+    border: 1px solid #888;
+    border-radius: 6px;
+    padding: 6px 15px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #888888;
+}
+li > input[type="text"] {
+    outline: none;
+    border: none;
+    cursor: default;
+    margin-right: 2rem;
+}
+input.edited {
+    cursor: text !important;
+    border: 1px solid #888888 !important;
+}
+div {
+    display: none;
+}
+
+div .completedBtn, .activeBtn, .allBtn {
+    outline: none;
+    border: 1px solid #888888;
+    border-radius: 5px;
+    background-color: #fcfcfc;
+    color: #888888;
+    text-align: center;
+    padding: 1.5px 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+.completed {
+    opacity: .5;
+    text-decoration: line-through;
+}
+.edit-completed {
+    opacity: 1 !important;
+    text-decoration: none !important;
+}
+button.selected {
+    border: 1px solid #111;
+    background-color: #fff;
+    color: #111;
+}
+li button {
+    /* padding: 0 1.2rem; */
+    margin: 0 .3rem;
+    width: 4rem;
+    text-align: center;
+}
